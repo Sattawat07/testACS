@@ -1,16 +1,20 @@
 <!doctype html>
 <html lang="th" data-theme="dark" data-font="inter">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Web Programming Practice Lab — แพลตฟอร์มฝึกเขียน CSS และ JavaScript ขั้นสูงสำหรับนักศึกษา พร้อมพรีวิวและเฉลยโค้ดครบถ้วน">
-  <title>Web Programming Practice Lab — โมเดิร์นแล็บ</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Cpath d='M20 22L10 32l10 10M44 22l10 10-10 10M36 14l-8 36' fill='none' stroke='%2338bdf8' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description"
+			content="Web Programming Practice Lab — แพลตฟอร์มฝึกเขียน CSS และ JavaScript ขั้นสูงสำหรับนักศึกษา พร้อมพรีวิวและเฉลยโค้ดครบถ้วน">
+		<title>Web Programming Practice Lab — โมเดิร์นแล็บ</title>
+		<link rel="icon" type="image/svg+xml"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Cpath d='M20 22L10 32l10 10M44 22l10 10-10 10M36 14l-8 36' fill='none' stroke='%2338bdf8' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap"
+			rel="stylesheet">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
     tailwind.config = {
       darkMode: ['class', '[data-theme="dark"]'],
       theme: {
@@ -22,7 +26,7 @@
       }
     }
   </script>
-  <style>
+		<style>
     :root {
       --font-family: 'Inter', 'Noto Sans Thai', sans-serif;
       --code-font: 'Fira Code', monospace;
@@ -48,235 +52,364 @@
       backdrop-filter: blur(8px);
     }
   </style>
-</head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white transition-colors duration-200">
+	</head>
+	<body
+		class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white transition-colors duration-200">
 
-  <!-- Top Header Bar -->
-  <header class="h-20 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 px-4 md:px-8 flex items-center justify-between gap-4 shadow-sm">
-    <div class="flex items-center gap-3">
-      <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-black shadow-lg shadow-emerald-500/20 text-lg">&lt;/&gt;</div>
-      <div>
-        <h1 class="font-extrabold text-base md:text-lg tracking-tight flex items-center gap-2">
-          Web Programming Practice Lab
-          <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">CSS & JS Focus</span>
-        </h1>
-        <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">เน้นฝึกเขียน CSS และ JavaScript จากโครงสร้าง HTML ที่เตรียมไว้ให้พร้อม</p>
-      </div>
-    </div>
+		<!-- Top Header Bar -->
+		<header
+			class="h-20 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 px-4 md:px-8 flex items-center justify-between gap-4 shadow-sm">
+			<div class="flex items-center gap-3">
+				<div
+					class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-black shadow-lg shadow-emerald-500/20 text-lg">&lt;/&gt;</div>
+				<div>
+					<h1
+						class="font-extrabold text-base md:text-lg tracking-tight flex items-center gap-2">
+						Web Programming Practice Lab
+						<span
+							class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">CSS
+							& JS Focus</span>
+					</h1>
+					<p
+						class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">เน้นฝึกเขียน
+						CSS และ JavaScript จากโครงสร้าง HTML ที่เตรียมไว้ให้พร้อม</p>
+				</div>
+			</div>
 
-    <div class="flex items-center gap-2 sm:gap-4">
-      <!-- Font Switcher -->
-      <div class="hidden lg:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700">
-        <span class="px-2 text-slate-400">ฟอนต์:</span>
-        <button type="button" data-font-btn="inter" class="px-2.5 py-1 rounded-lg transition-all">Inter</button>
-        <button type="button" data-font-btn="prompt" class="px-2.5 py-1 rounded-lg transition-all">Prompt</button>
-        <button type="button" data-font-btn="sarabun" class="px-2.5 py-1 rounded-lg transition-all">Sarabun</button>
-      </div>
+			<div class="flex items-center gap-2 sm:gap-4">
+				<!-- Font Switcher -->
+				<div
+					class="hidden lg:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700">
+					<span class="px-2 text-slate-400">ฟอนต์:</span>
+					<button type="button" data-font-btn="inter"
+						class="px-2.5 py-1 rounded-lg transition-all">Inter</button>
+					<button type="button" data-font-btn="prompt"
+						class="px-2.5 py-1 rounded-lg transition-all">Prompt</button>
+					<button type="button" data-font-btn="sarabun"
+						class="px-2.5 py-1 rounded-lg transition-all">Sarabun</button>
+				</div>
 
-      <!-- Theme Toggle -->
-      <button id="theme-toggle" type="button" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all flex items-center gap-2 text-xs font-medium">
-        <svg class="w-4 h-4 dark:hidden text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-        <svg class="w-4 h-4 hidden dark:block text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-        <span class="hidden md:inline theme-label">โหมดมืด</span>
-      </button>
+				<!-- Theme Toggle -->
+				<button id="theme-toggle" type="button"
+					class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all flex items-center gap-2 text-xs font-medium">
+					<svg class="w-4 h-4 dark:hidden text-amber-500" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+							stroke-linejoin="round" stroke-width="2"
+							d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+					<svg class="w-4 h-4 hidden dark:block text-emerald-400" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+							stroke-linejoin="round" stroke-width="2"
+							d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+					<span class="hidden md:inline theme-label">โหมดมืด</span>
+				</button>
 
-      <!-- Counter -->
-      <div class="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 px-3.5 py-2 rounded-xl flex items-center gap-2">
-        <div class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></div>
-        <span id="overall-counter" class="text-xs font-bold text-emerald-700 dark:text-emerald-300">ข้อ 01 / 12</span>
-      </div>
-    </div>
-  </header>
+				<!-- Counter -->
+				<div
+					class="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 px-3.5 py-2 rounded-xl flex items-center gap-2">
+					<div class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></div>
+					<span id="overall-counter"
+						class="text-xs font-bold text-emerald-700 dark:text-emerald-300">ข้อ 01 /
+						12</span>
+				</div>
+			</div>
+		</header>
 
-  <!-- Main Layout -->
-  <div class="flex-1 grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] min-h-[calc(100vh-5rem)]">
-    
-    <!-- Sidebar -->
-    <aside class="bg-slate-900 text-slate-100 p-5 flex flex-col gap-5 border-r border-slate-800" aria-label="รายการแบบฝึกหัด">
-      <div class="space-y-1">
-        <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400">ชุดฝึก CSS & JavaScript</span>
-        <h2 class="text-xl font-bold tracking-tight">เลือกโจทย์ฝึกฝน</h2>
-        <p class="text-xs text-slate-400">ดูตัวอย่างผลลัพธ์ แล้วเขียน CSS & JS ให้พรีวิวทำงานตรงกัน</p>
-      </div>
-      <div class="relative">
-        <input id="exercise-search" type="search" placeholder="ค้นหาโจทย์..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-emerald-500 transition-colors">
-      </div>
-      <nav id="exercise-nav-container" class="space-y-4 overflow-y-auto pr-1 max-h-[calc(100vh-17rem)]">
-        <!-- Dynamically generated nav -->
-      </nav>
-    </aside>
+		<!-- Main Layout -->
+		<div
+			class="flex-1 grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] min-h-[calc(100vh-5rem)]">
 
-    <!-- Workspace -->
-    <main class="p-4 md:p-8 max-w-7xl w-full mx-auto flex flex-col gap-6" aria-labelledby="active-task-title">
-      
-      <!-- Task Header Card -->
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2">
-            <span id="task-category-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">หมวดหมู่</span>
-            <span id="task-difficulty-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800">ระดับ</span>
-          </div>
-          <h2 id="active-task-title" class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">ชื่อโจทย์แบบฝึกหัด</h2>
-          <p id="active-task-brief" class="text-sm text-slate-600 dark:text-slate-400 max-w-3xl">คำอธิบายภารกิจ</p>
-        </div>
-        <div class="flex items-center gap-2.5 flex-wrap self-start md:self-center">
-          <button id="reset-current-btn" type="button" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold transition-all flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            ล้างโค้ดข้อนี้
-          </button>
-          <button id="show-solution-btn" type="button" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/20 hover:opacity-95 text-xs font-bold transition-all flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            แสดงเฉลยโค้ด (Solution)
-          </button>
-        </div>
-      </div>
+			<!-- Sidebar -->
+			<aside
+				class="bg-slate-900 text-slate-100 p-5 flex flex-col gap-5 border-r border-slate-800"
+				aria-label="รายการแบบฝึกหัด">
+				<div class="space-y-1">
+					<span
+						class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400">ชุดฝึก
+						CSS & JavaScript</span>
+					<h2 class="text-xl font-bold tracking-tight">เลือกโจทย์ฝึกฝน</h2>
+					<p class="text-xs text-slate-400">ดูตัวอย่างผลลัพธ์ แล้วเขียน CSS & JS
+						ให้พรีวิวทำงานตรงกัน</p>
+				</div>
+				<div class="relative">
+					<input id="exercise-search" type="search" placeholder="ค้นหาโจทย์..."
+						class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-emerald-500 transition-colors">
+				</div>
+				<nav id="exercise-nav-container"
+					class="space-y-4 overflow-y-auto pr-1 max-h-[calc(100vh-17rem)]">
+					<!-- Dynamically generated nav -->
+				</nav>
+			</aside>
 
-      <!-- Reference Goal & Live Output Side-by-Side (Spacious Full View) -->
-      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        
-        <!-- Reference Frame (Left) -->
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm flex flex-col">
-          <div class="h-12 px-5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> ผลลัพธ์เป้าหมาย (Reference Goal)
-            </h3>
-            <span class="text-xs text-slate-400">โต้ตอบและทดลองเล่นได้</span>
-          </div>
-          <div class="flex-1 bg-slate-100 dark:bg-slate-950/50 p-5 flex items-center justify-center min-h-[320px]">
-            <div class="w-full h-full flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-800">
-              <iframe id="reference-frame" title="Reference Target" class="w-full h-[320px] border-0" sandbox="allow-scripts allow-forms"></iframe>
-            </div>
-          </div>
-        </div>
+			<!-- Workspace -->
+			<main class="p-4 md:p-8 max-w-7xl w-full mx-auto flex flex-col gap-6"
+				aria-labelledby="active-task-title">
 
-        <!-- Live Output Preview (Right) -->
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm flex flex-col">
-          <div class="h-12 px-5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> พรีวิวผลลัพธ์ของคุณ (Live Output)
-            </h3>
-            <span id="preview-status-badge" role="status" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">พรีวิวพร้อมทำงาน</span>
-          </div>
-          <div class="flex-1 bg-slate-100 dark:bg-slate-950/50 p-5 flex items-center justify-center min-h-[320px]">
-            <div class="w-full h-full flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-800">
-              <iframe id="user-frame" title="User Live Output Preview" class="w-full h-[320px] border-0" sandbox="allow-scripts allow-forms"></iframe>
-            </div>
-          </div>
-        </div>
+				<!-- Task Header Card -->
+				<div
+					class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+					<div class="space-y-1.5">
+						<div class="flex items-center gap-2">
+							<span id="task-category-badge"
+								class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">หมวดหมู่</span>
+							<span id="task-difficulty-badge"
+								class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800">ระดับ</span>
+						</div>
+						<h2 id="active-task-title"
+							class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">ชื่อโจทย์แบบฝึกหัด</h2>
+						<p id="active-task-brief"
+							class="text-sm text-slate-600 dark:text-slate-400 max-w-3xl">คำอธิบายภารกิจ</p>
+					</div>
+					<div class="flex items-center gap-2.5 flex-wrap self-start md:self-center">
+						<button id="reset-current-btn" type="button"
+							class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold transition-all flex items-center gap-2">
+							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+								stroke="currentColor"><path stroke-linecap="round"
+									stroke-linejoin="round" stroke-width="2"
+									d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+							ล้างโค้ดข้อนี้
+						</button>
+						<button id="show-solution-btn" type="button"
+							class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-orange-500/20 hover:opacity-95 text-xs font-bold transition-all flex items-center gap-2">
+							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+								stroke="currentColor"><path stroke-linecap="round"
+									stroke-linejoin="round" stroke-width="2"
+									d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round"
+									stroke-linejoin="round" stroke-width="2"
+									d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+							แสดงเฉลยโค้ด (Solution)
+						</button>
+					</div>
+				</div>
 
-      </div>
+				<!-- Reference Goal & Live Output Side-by-Side (Spacious Full View) -->
+				<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
 
-      <!-- Colors used by the current reference exercise -->
-      <section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm" aria-labelledby="exercise-colors-title">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <h3 id="exercise-colors-title" class="font-bold text-base text-slate-900 dark:text-white">รหัสสีของข้อนี้</h3>
-          <button id="toggle-colors-btn" type="button" aria-expanded="false" aria-controls="exercise-colors-panel" class="self-start px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-xs font-bold transition-colors">แสดงรหัสสี</button>
-        </div>
-        <div id="exercise-colors-panel" class="hidden mt-4">
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">สีที่ใช้ใน CSS ของผลลัพธ์เป้าหมาย · รหัส 8 หลักมีค่าความโปร่งใสอยู่ 2 หลักท้าย</p>
-          <div id="exercise-colors" class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2" aria-live="polite"></div>
-        </div>
-      </section>
+					<!-- Reference Frame (Left) -->
+					<div
+						class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+						<div
+							class="h-12 px-5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+							<h3
+								class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
+								<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+								ผลลัพธ์เป้าหมาย (Reference Goal)
+							</h3>
+							<span class="text-xs text-slate-400">โต้ตอบและทดลองเล่นได้</span>
+						</div>
+						<div
+							class="flex-1 bg-slate-100 dark:bg-slate-950/50 p-5 flex items-center justify-center min-h-[320px]">
+							<div
+								class="w-full h-full flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-800">
+								<iframe id="reference-frame" title="Reference Target"
+									class="w-full h-[320px] border-0"
+									sandbox="allow-scripts allow-forms"></iframe>
+							</div>
+						</div>
+					</div>
 
-      <!-- Code Editor Workspace -->
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-        <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h3 class="font-bold text-base text-slate-900 dark:text-white">พื้นที่เขียนโค้ดของคุณ (Code Editor)</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">แก้ไข CSS และ JavaScript ในแท็บด้านล่าง (HTML ถูกตั้งค่าเตรียมไว้ให้เรียบร้อย)</p>
-          </div>
-          <button id="run-code-btn" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/20 transition-all flex items-center gap-2">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            รันโค้ดทันที (Run)
-          </button>
-        </div>
+					<!-- Live Output Preview (Right) -->
+					<div
+						class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+						<div
+							class="h-12 px-5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+							<h3
+								class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
+								<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+								พรีวิวผลลัพธ์ของคุณ (Live Output)
+							</h3>
+							<span id="preview-status-badge" role="status"
+								class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">พรีวิวพร้อมทำงาน</span>
+						</div>
+						<div
+							class="flex-1 bg-slate-100 dark:bg-slate-950/50 p-5 flex items-center justify-center min-h-[320px]">
+							<div
+								class="w-full h-full flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-800">
+								<iframe id="user-frame" title="User Live Output Preview"
+									class="w-full h-[320px] border-0"
+									sandbox="allow-scripts allow-forms"></iframe>
+							</div>
+						</div>
+					</div>
 
-        <!-- Tabs -->
-        <div class="bg-slate-100 dark:bg-slate-950 px-4 pt-2 border-b border-slate-200 dark:border-slate-800 flex gap-2" role="tablist">
-          <button type="button" role="tab" id="tab-html" aria-controls="panel-html" aria-selected="false" data-code-tab="html" class="px-4 py-2.5 rounded-t-xl text-xs font-bold transition-all border-t border-x border-transparent data-[selected=true]:bg-white dark:data-[selected=true]:bg-slate-900 data-[selected=true]:border-slate-200 dark:data-[selected=true]:border-slate-800 data-[selected=true]:text-emerald-600 dark:data-[selected=true]:text-emerald-400 text-slate-500">HTML (Read-only)</button>
-          <button type="button" role="tab" id="tab-css" aria-controls="panel-css" aria-selected="true" data-code-tab="css" class="px-4 py-2.5 rounded-t-xl text-xs font-bold transition-all border-t border-x border-transparent data-[selected=true]:bg-white dark:data-[selected=true]:bg-slate-900 data-[selected=true]:border-slate-200 dark:data-[selected=true]:border-slate-800 data-[selected=true]:text-emerald-600 dark:data-[selected=true]:text-emerald-400 text-slate-500">CSS Stylesheet</button>
-          <button type="button" role="tab" id="tab-js" aria-controls="panel-js" aria-selected="false" data-code-tab="js" class="px-4 py-2.5 rounded-t-xl text-xs font-bold transition-all border-t border-x border-transparent data-[selected=true]:bg-white dark:data-[selected=true]:bg-slate-900 data-[selected=true]:border-slate-200 dark:data-[selected=true]:border-slate-800 data-[selected=true]:text-emerald-600 dark:data-[selected=true]:text-emerald-400 text-slate-500">JavaScript Logic</button>
-        </div>
+				</div>
 
-        <!-- Textareas -->
-        <div class="relative bg-slate-950 text-slate-100">
-          <div id="panel-html" role="tabpanel" aria-labelledby="tab-html" data-code-panel="html" class="p-0 hidden">
-            <textarea id="html-editor" readonly spellcheck="false" class="w-full h-80 bg-slate-950 text-slate-400 code-font p-4 text-xs leading-relaxed resize-y focus:outline-none cursor-default" aria-label="HTML Code"></textarea>
-          </div>
-          <div id="panel-css" role="tabpanel" aria-labelledby="tab-css" data-code-panel="css" class="p-0">
-            <textarea id="css-editor" spellcheck="false" class="w-full h-80 bg-slate-950 text-amber-200 code-font p-4 text-xs leading-relaxed resize-y focus:outline-none" aria-label="CSS Code"></textarea>
-          </div>
-          <div id="panel-js" role="tabpanel" aria-labelledby="tab-js" data-code-panel="js" class="p-0 hidden">
-            <textarea id="js-editor" spellcheck="false" class="w-full h-80 bg-slate-950 text-emerald-200 code-font p-4 text-xs leading-relaxed resize-y focus:outline-none" aria-label="JavaScript Code"></textarea>
-          </div>
-        </div>
-      </div>
+				<!-- Colors used by the current reference exercise -->
+				<section
+					class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm"
+					aria-labelledby="exercise-colors-title">
+					<div
+						class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+						<h3 id="exercise-colors-title"
+							class="font-bold text-base text-slate-900 dark:text-white">รหัสสีของข้อนี้</h3>
+						<button id="toggle-colors-btn" type="button" aria-expanded="false"
+							aria-controls="exercise-colors-panel"
+							class="self-start px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-xs font-bold transition-colors">แสดงรหัสสี</button>
+					</div>
+					<div id="exercise-colors-panel" class="hidden mt-4">
+						<p class="text-xs text-slate-500 dark:text-slate-400 mb-3">สีที่ใช้ใน CSS
+							ของผลลัพธ์เป้าหมาย · รหัส 8 หลักมีค่าความโปร่งใสอยู่ 2 หลักท้าย</p>
+						<div id="exercise-colors"
+							class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2"
+							aria-live="polite"></div>
+					</div>
+				</section>
 
-      <!-- Progressive Hints -->
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
-          <div>
-            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">คำแนะนำทีละขั้นตอน</span>
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white">คำใบ้ทีละระดับ (Progressive Hints)</h3>
-          </div>
-          <button id="next-hint-btn" type="button" class="px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-xs font-bold transition-all">
-            เปิดคำใบ้ถัดไป
-          </button>
-        </div>
-        <div id="hints-container" class="space-y-3"></div>
-      </div>
+				<!-- Code Editor Workspace -->
+				<div
+					class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+					<div
+						class="p-5 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+						<div>
+							<h3
+								class="font-bold text-base text-slate-900 dark:text-white">พื้นที่เขียนโค้ดของคุณ
+								(Code Editor)</h3>
+							<p class="text-xs text-slate-500 dark:text-slate-400">แก้ไข CSS และ
+								JavaScript ในแท็บด้านล่าง (HTML ถูกตั้งค่าเตรียมไว้ให้เรียบร้อย)</p>
+						</div>
+						<button id="run-code-btn" type="button"
+							class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/20 transition-all flex items-center gap-2">
+							<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path
+									d="M8 5v14l11-7z" /></svg>
+							รันโค้ดทันที (Run)
+						</button>
+					</div>
 
-    </main>
-  </div>
+					<!-- Tabs -->
+					<div
+						class="bg-slate-100 dark:bg-slate-950 px-4 pt-2 border-b border-slate-200 dark:border-slate-800 flex gap-2"
+						role="tablist">
+						<button type="button" role="tab" id="tab-html" aria-controls="panel-html"
+							aria-selected="false" data-code-tab="html"
+							class="px-4 py-2.5 rounded-t-xl text-xs font-bold transition-all border-t border-x border-transparent data-[selected=true]:bg-white dark:data-[selected=true]:bg-slate-900 data-[selected=true]:border-slate-200 dark:data-[selected=true]:border-slate-800 data-[selected=true]:text-emerald-600 dark:data-[selected=true]:text-emerald-400 text-slate-500">HTML
+							(Read-only)</button>
+						<button type="button" role="tab" id="tab-css" aria-controls="panel-css"
+							aria-selected="true" data-code-tab="css"
+							class="px-4 py-2.5 rounded-t-xl text-xs font-bold transition-all border-t border-x border-transparent data-[selected=true]:bg-white dark:data-[selected=true]:bg-slate-900 data-[selected=true]:border-slate-200 dark:data-[selected=true]:border-slate-800 data-[selected=true]:text-emerald-600 dark:data-[selected=true]:text-emerald-400 text-slate-500">CSS
+							Stylesheet</button>
+						<button type="button" role="tab" id="tab-js" aria-controls="panel-js"
+							aria-selected="false" data-code-tab="js"
+							class="px-4 py-2.5 rounded-t-xl text-xs font-bold transition-all border-t border-x border-transparent data-[selected=true]:bg-white dark:data-[selected=true]:bg-slate-900 data-[selected=true]:border-slate-200 dark:data-[selected=true]:border-slate-800 data-[selected=true]:text-emerald-600 dark:data-[selected=true]:text-emerald-400 text-slate-500">JavaScript
+							Logic</button>
+					</div>
 
-  <!-- Solution Modal (Formatted as clean block code with proper indentation and vertical readability) -->
-  <dialog id="solution-modal" class="bg-transparent p-0 max-w-4xl w-full rounded-2xl shadow-2xl backdrop:bg-slate-900/80">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col max-h-[85vh]">
-      <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50">
-        <div>
-          <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">เฉลยตัวอย่าง (Official Solution)</span>
-          <h3 id="solution-modal-title" class="font-bold text-base text-slate-900 dark:text-white">โค้ดตัวอย่างต้นแบบ</h3>
-        </div>
-        <button id="close-solution-btn" type="button" class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <div class="p-6 overflow-y-auto space-y-6">
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-amber-400"></span> CSS Stylesheet Solution
-            </span>
-            <span class="text-[11px] text-slate-400">รูปแบบโค้ดบล็อก จัดบรรทัดอ่านง่าย</span>
-          </div>
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-inner">
-            <pre class="text-amber-200 text-xs code-font whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto"><code id="solution-css-code"></code></pre>
-          </div>
-        </div>
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> JavaScript Logic Solution
-            </span>
-            <span class="text-[11px] text-slate-400">รูปแบบโค้ดบล็อก จัดบรรทัดอ่านง่าย</span>
-          </div>
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-inner">
-            <pre class="text-emerald-200 text-xs code-font whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto"><code id="solution-js-code"></code></pre>
-          </div>
-        </div>
-      </div>
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
-        <span id="copy-status-msg" class="text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 transition-opacity">✓ คัดลอกเฉลยใส่ใน Editor เรียบร้อยแล้ว</span>
-        <div class="flex gap-3">
-          <button id="apply-solution-btn" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md shadow-emerald-600/20">
-            คัดลอกเฉลยใส่ใน Editor ของฉัน
-          </button>
-        </div>
-      </div>
-    </div>
-  </dialog>
+					<!-- Textareas -->
+					<div class="relative bg-slate-950 text-slate-100">
+						<div id="panel-html" role="tabpanel" aria-labelledby="tab-html"
+							data-code-panel="html" class="p-0 hidden">
+							<textarea id="html-editor" readonly spellcheck="false"
+								class="w-full h-80 bg-slate-950 text-slate-400 code-font p-4 text-xs leading-relaxed resize-y focus:outline-none cursor-default"
+								aria-label="HTML Code"></textarea>
+						</div>
+						<div id="panel-css" role="tabpanel" aria-labelledby="tab-css"
+							data-code-panel="css" class="p-0">
+							<textarea id="css-editor" spellcheck="false"
+								class="w-full h-80 bg-slate-950 text-amber-200 code-font p-4 text-xs leading-relaxed resize-y focus:outline-none"
+								aria-label="CSS Code"></textarea>
+						</div>
+						<div id="panel-js" role="tabpanel" aria-labelledby="tab-js"
+							data-code-panel="js" class="p-0 hidden">
+							<textarea id="js-editor" spellcheck="false"
+								class="w-full h-80 bg-slate-950 text-emerald-200 code-font p-4 text-xs leading-relaxed resize-y focus:outline-none"
+								aria-label="JavaScript Code"></textarea>
+						</div>
+					</div>
+				</div>
 
-  <script>
+				<!-- Progressive Hints -->
+				<div
+					class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+					<div
+						class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+						<div>
+							<span
+								class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">คำแนะนำทีละขั้นตอน</span>
+							<h3
+								class="text-lg font-bold text-slate-900 dark:text-white">คำใบ้ทีละระดับ
+								(Progressive Hints)</h3>
+						</div>
+						<button id="next-hint-btn" type="button"
+							class="px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-xs font-bold transition-all">
+							เปิดคำใบ้ถัดไป
+						</button>
+					</div>
+					<div id="hints-container" class="space-y-3"></div>
+				</div>
+
+			</main>
+		</div>
+
+		<!-- Solution Modal (Formatted as clean block code with proper indentation and vertical readability) -->
+		<dialog id="solution-modal"
+			class="bg-transparent p-0 max-w-4xl w-full rounded-2xl shadow-2xl backdrop:bg-slate-900/80">
+			<div
+				class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col max-h-[85vh]">
+				<div
+					class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50">
+					<div>
+						<span
+							class="text-xs font-bold text-amber-500 uppercase tracking-wider">เฉลยตัวอย่าง
+							(Official Solution)</span>
+						<h3 id="solution-modal-title"
+							class="font-bold text-base text-slate-900 dark:text-white">โค้ดตัวอย่างต้นแบบ</h3>
+					</div>
+					<button id="close-solution-btn" type="button"
+						class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+						<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+							stroke="currentColor"><path stroke-linecap="round"
+								stroke-linejoin="round" stroke-width="2"
+								d="M6 18L18 6M6 6l12 12" /></svg>
+					</button>
+				</div>
+				<div class="p-6 overflow-y-auto space-y-6">
+					<div>
+						<div class="flex items-center justify-between mb-2">
+							<span
+								class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+								<span class="w-2 h-2 rounded-full bg-amber-400"></span> CSS Stylesheet
+								Solution
+							</span>
+							<span class="text-[11px] text-slate-400">รูปแบบโค้ดบล็อก
+								จัดบรรทัดอ่านง่าย</span>
+						</div>
+						<div
+							class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-inner">
+							<pre
+								class="text-amber-200 text-xs code-font whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto"><code id="solution-css-code"></code></pre>
+						</div>
+					</div>
+					<div>
+						<div class="flex items-center justify-between mb-2">
+							<span
+								class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+								<span class="w-2 h-2 rounded-full bg-emerald-400"></span> JavaScript
+								Logic Solution
+							</span>
+							<span class="text-[11px] text-slate-400">รูปแบบโค้ดบล็อก
+								จัดบรรทัดอ่านง่าย</span>
+						</div>
+						<div
+							class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-inner">
+							<pre
+								class="text-emerald-200 text-xs code-font whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto"><code id="solution-js-code"></code></pre>
+						</div>
+					</div>
+				</div>
+				<div
+					class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
+					<span id="copy-status-msg"
+						class="text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 transition-opacity">✓
+						คัดลอกเฉลยใส่ใน Editor เรียบร้อยแล้ว</span>
+					<div class="flex gap-3">
+						<button id="apply-solution-btn" type="button"
+							class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md shadow-emerald-600/20">
+							คัดลอกเฉลยใส่ใน Editor ของฉัน
+						</button>
+					</div>
+				</div>
+			</div>
+		</dialog>
+
+		<script>
     // Self-contained SVG scenes keep the gallery usable when opened offline.
     const EMBEDDED_SCENES = Object.fromEntries(Object.entries({
       "1": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#fca674"/><stop offset=".6" stop-color="#ffe5b8"/><stop offset="1" stop-color="#d5e9db"/></linearGradient></defs><rect width="600" height="340" fill="url(#sky)"/><circle cx="451" cy="98" r="48" fill="#fff6d4"/><path d="M0 243 142 105l121 134 92-98 145 110 100-84v173H0" fill="#698a88"/><path d="M0 284 125 173l117 111 116-111 123 107 119-59v119H0" fill="#315f69"/><path d="M0 292q151-50 299 2t301-8v54H0" fill="#77aa90"/><path d="M0 326q168-52 333-9t267-12v35H0" fill="#467967"/></svg>`,
@@ -895,5 +1028,5 @@
     const targetEx = EXERCISES.find(e => e.id === initialHash) || EXERCISES[0];
     selectExercise(targetEx.id);
   </script>
-</body>
+	</body>
 </html>
