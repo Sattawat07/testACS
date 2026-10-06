@@ -166,6 +166,18 @@
 
       </div>
 
+      <!-- Colors used by the current reference exercise -->
+      <section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm" aria-labelledby="exercise-colors-title">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <h3 id="exercise-colors-title" class="font-bold text-base text-slate-900 dark:text-white">รหัสสีของข้อนี้</h3>
+          <button id="toggle-colors-btn" type="button" aria-expanded="false" aria-controls="exercise-colors-panel" class="self-start px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-xs font-bold transition-colors">แสดงรหัสสี</button>
+        </div>
+        <div id="exercise-colors-panel" class="hidden mt-4">
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">สีที่ใช้ใน CSS ของผลลัพธ์เป้าหมาย · รหัส 8 หลักมีค่าความโปร่งใสอยู่ 2 หลักท้าย</p>
+          <div id="exercise-colors" class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2" aria-live="polite"></div>
+        </div>
+      </section>
+
       <!-- Code Editor Workspace -->
       <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
         <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -541,6 +553,9 @@
     const solutionModalTitle = document.querySelector("#solution-modal-title");
     const nextHintBtn = document.querySelector("#next-hint-btn");
     const hintsContainer = document.querySelector("#hints-container");
+    const exerciseColors = document.querySelector("#exercise-colors");
+    const exerciseColorsPanel = document.querySelector("#exercise-colors-panel");
+    const toggleColorsBtn = document.querySelector("#toggle-colors-btn");
     const overallCounter = document.querySelector("#overall-counter");
     const themeToggle = document.querySelector("#theme-toggle");
 
@@ -662,6 +677,71 @@
       nextHintBtn.classList.toggle("opacity-50", revealedHintsCount >= hints.length);
     }
 
+    function normalizeColorCode(value) {
+      const code = value.toUpperCase();
+      if (code === 'WHITE') return '#FFFFFF';
+      if (code === 'BLACK') return '#000000';
+      if (code.length === 4 || code.length === 5) {
+        return '#' + [...code.slice(1)].map(char => char + char).join('');
+      }
+      return code;
+    }
+
+    function colorPurpose(property) {
+      if (property === 'color') return 'ตัวอักษร';
+      if (property.startsWith('background')) return 'พื้นหลัง';
+      if (property.startsWith('border')) return 'ขอบ';
+      if (property.includes('shadow')) return 'เงา';
+      if (property.startsWith('outline')) return 'เส้นโฟกัส';
+      return property;
+    }
+
+    function renderColorPalette(css) {
+      const colors = new Map();
+      for (const rule of css.matchAll(/\{([^{}]*)\}/g)) {
+        for (const declaration of rule[1].split(';')) {
+          const colon = declaration.indexOf(':');
+          if (colon < 0) continue;
+          const property = declaration.slice(0, colon).trim().toLowerCase();
+          const value = declaration.slice(colon + 1);
+          for (const match of value.matchAll(/#[0-9a-f]{3,8}\b|\b(?:white|black)\b/gi)) {
+            const code = normalizeColorCode(match[0]);
+            if (!colors.has(code)) colors.set(code, new Set());
+            colors.get(code).add(colorPurpose(property));
+          }
+        }
+      }
+
+      exerciseColors.replaceChildren();
+      for (const [code, purposes] of colors) {
+        const item = document.createElement('div');
+        item.className = 'flex items-center gap-2.5 min-w-0 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 px-3 py-2';
+        const swatch = document.createElement('span');
+        swatch.className = 'w-8 h-8 shrink-0 rounded-lg border border-slate-300 dark:border-slate-600 shadow-sm';
+        swatch.style.backgroundColor = code;
+        swatch.setAttribute('aria-hidden', 'true');
+        const detail = document.createElement('span');
+        detail.className = 'min-w-0 flex flex-col';
+        const label = document.createElement('code');
+        label.className = 'text-xs font-bold text-slate-800 dark:text-slate-100 select-all';
+        label.textContent = code;
+        const purpose = document.createElement('span');
+        purpose.className = 'text-[11px] text-slate-500 dark:text-slate-400 truncate';
+        purpose.textContent = [...purposes].join(' · ');
+        purpose.title = purpose.textContent;
+        detail.append(label, purpose);
+        item.append(swatch, detail);
+        exerciseColors.appendChild(item);
+      }
+    }
+
+    toggleColorsBtn.addEventListener('click', () => {
+      const expanded = toggleColorsBtn.getAttribute('aria-expanded') === 'true';
+      exerciseColorsPanel.classList.toggle('hidden', expanded);
+      toggleColorsBtn.setAttribute('aria-expanded', String(!expanded));
+      toggleColorsBtn.textContent = expanded ? 'แสดงรหัสสี' : 'ซ่อนรหัสสี';
+    });
+
     nextHintBtn.addEventListener("click", () => {
       if (revealedHintsCount < currentExercise.hints.length) {
         revealedHintsCount++;
@@ -684,6 +764,7 @@
       taskDifficultyBadge.textContent = found.level;
       activeTaskTitle.textContent = found.title;
       activeTaskBrief.textContent = found.brief;
+      renderColorPalette(found.solutionCss);
 
       referenceFrame.srcdoc = createDoc(found.html, found.solutionCss, found.solutionJs, "reference");
       htmlEditor.value = formatHtmlCode(found.html);
