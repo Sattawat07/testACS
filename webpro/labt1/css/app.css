@@ -1,0 +1,24 @@
+:root {
+      --font-family: 'Inter', 'Noto Sans Thai', sans-serif;
+      --code-font: 'Fira Code', monospace;
+    }
+    [data-font="prompt"] { --font-family: 'Prompt', sans-serif; }
+    [data-font="sarabun"] { --font-family: 'Sarabun', sans-serif; }
+    [data-font="inter"] { --font-family: 'Inter', 'Noto Sans Thai', sans-serif; }
+    
+    body {
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .code-font { font-family: var(--code-font); }
+    
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
+
+    dialog::backdrop {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+    }
