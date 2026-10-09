@@ -109,7 +109,7 @@
 					<div class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></div>
 					<span id="overall-counter"
 						class="text-xs font-bold text-emerald-700 dark:text-emerald-300">ข้อ 01 /
-						12</span>
+						27</span>
 				</div>
 			</div>
 		</header>
@@ -374,7 +374,7 @@
 						<div
 							class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-inner">
 							<pre
-								class="text-amber-200 text-xs code-font whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto"><code id="solution-css-code"></code></pre>
+								class="text-amber-200 text-xs code-font whitespace-pre leading-relaxed max-h-72 overflow-auto"><code id="solution-css-code"></code></pre>
 						</div>
 					</div>
 					<div>
@@ -390,7 +390,7 @@
 						<div
 							class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-inner">
 							<pre
-								class="text-emerald-200 text-xs code-font whitespace-pre-wrap leading-relaxed max-h-72 overflow-y-auto"><code id="solution-js-code"></code></pre>
+								class="text-emerald-200 text-xs code-font whitespace-pre leading-relaxed max-h-72 overflow-auto"><code id="solution-js-code"></code></pre>
 						</div>
 					</div>
 				</div>
@@ -409,6 +409,7 @@
 			</div>
 		</dialog>
 
+		<script src="additional-exercises.js"></script>
 		<script>
     // Self-contained SVG scenes keep the gallery usable when opened offline.
     const EMBEDDED_SCENES = Object.fromEntries(Object.entries({
@@ -435,27 +436,116 @@
       }).filter(Boolean).join('\n');
     }
 
-    // Helper to format raw one-line CSS/JS into readable indented blocks
-    function formatCssCode(code) {
+    // Format only outside strings and comments so the displayed code stays valid.
+    function formatCode(code, language) {
       if (!code) return '';
-      return code
-        .replace(/\/\*[\s\S]*?\*\//g, m => m) // preserve comments
-        .replace(/\s*\{\s*/g, ' {\n  ')
-        .replace(/\s*;\s*/g, ';\n  ')
-        .replace(/\s*\}\s*/g, '\n}\n')
-        .replace(/;\n\s*\}/g, ';\n}')
-        .trim();
+      const lines = [];
+      let line = '';
+      let depth = 0;
+      const parenthesisStack = [];
+      const cssBlocks = [];
+      const flush = () => {
+        const value = line.trim();
+        if (value) lines.push('  '.repeat(depth) + value);
+        line = '';
+      };
+
+      for (let i = 0; i < code.length; i++) {
+        const char = code[i];
+        const next = code[i + 1];
+
+        if (char === '"' || char === "'" || char === '`') {
+          const quote = char;
+          line += char;
+          while (++i < code.length) {
+            line += code[i];
+            if (code[i] === '\\') {
+              if (i + 1 < code.length) line += code[++i];
+            } else if (code[i] === quote) break;
+          }
+          continue;
+        }
+        if (char === '/' && next === '/') {
+          while (i < code.length && code[i] !== '\n') line += code[i++];
+          flush();
+          continue;
+        }
+        if (char === '/' && next === '*') {
+          line += '/*';
+          i += 2;
+          while (i < code.length) {
+            line += code[i];
+            if (code[i] === '*' && code[i + 1] === '/') {
+              line += '/';
+              i++;
+              break;
+            }
+            i++;
+          }
+          continue;
+        }
+        if (/\s/.test(char)) {
+          if (line && !line.endsWith(' ')) line += ' ';
+          continue;
+        }
+        if (char === '(') parenthesisStack.push(/\bfor\s*$/.test(line));
+        if (char === ')') parenthesisStack.pop();
+        if (char === '{') {
+          if (language === 'css') cssBlocks.push(line.trim().startsWith('@') ? 'at' : 'rule');
+          line = line.trimEnd() + ' {';
+          flush();
+          depth++;
+          continue;
+        }
+        if (char === '}') {
+          if (language === 'css' && cssBlocks.at(-1) === 'rule' && line.trim() && !line.trimEnd().endsWith(';')) {
+            line = line.trimEnd() + ';';
+          }
+          flush();
+          depth = Math.max(0, depth - 1);
+          if (language === 'css') cssBlocks.pop();
+          line = '}';
+          const following = code.slice(i + 1).trimStart();
+          if (language === 'css' || (!/^[);,.\]]/.test(following) && !/^(?:else|catch|finally)\b/.test(following))) {
+            flush();
+            if (language === 'css' && depth === 0) lines.push('');
+          }
+          continue;
+        }
+        if (char === ';' && !parenthesisStack.includes(true)) {
+          line += ';';
+          flush();
+          continue;
+        }
+        if (char === ':' && language === 'css' && cssBlocks.at(-1) === 'rule' && /^(?:--)?[a-zA-Z][\w-]*$/.test(line.trim())) {
+          line = line.trimEnd() + ': ';
+          continue;
+        }
+        if (language === 'js' && (code.slice(i, i + 2) === '++' || code.slice(i, i + 2) === '--')) {
+          line += code.slice(i, i + 2);
+          i++;
+          continue;
+        }
+        if (language === 'js') {
+          const operator = code.slice(i).match(/^(?:===|!==|==|!=|=>|<=|>=|\+=|-=|\*=|&&|\|\||=|\+|-|\*|<|>)/)?.[0];
+          if (operator) {
+            line = line.trimEnd() + ' ' + operator + ' ';
+            i += operator.length - 1;
+            continue;
+          }
+        }
+        if (char === ',') {
+          line = line.trimEnd() + ', ';
+          continue;
+        }
+        line += char;
+      }
+      flush();
+      return lines.join('\n').trim();
     }
 
-    function formatJsCode(code) {
-      if (!code) return '';
-      return code
-        .replace(/\/\/.*/g, m => m) // preserve comments
-        .replace(/;\s*/g, ';\n')
-        .replace(/\{\s*/g, ' {\n  ')
-        .replace(/\}\s*/g, '\n}\n')
-        .trim();
-    }
+    function formatCssCode(code) { return formatCode(code, 'css'); }
+    function formatJsCode(code) { return formatCode(code, 'js'); }
 
     const EXERCISES = [
       {
@@ -520,6 +610,7 @@
         solutionCss: `.lesson-page { width: 100%; min-height: 230px; border: 1px solid #d4e0e9; border-radius: 13px; overflow: hidden; background: white; }\n.lesson-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; background: #172b49; color: white; }\n.lesson-header strong { font-size: .87rem; letter-spacing: .06em; }\n.lesson-header nav { display: flex; gap: 5px; flex-wrap: wrap; }\n.lesson-header button { border: 0; border-radius: 7px; background: transparent; color: #d0e1eb; padding: 7px 9px; font-size: .75rem; cursor: pointer; }\n.lesson-header button.active { background: #67e2d3; color: #142943; font-weight: 900; }\n.lesson-main { padding: 20px; }\n.lesson-main section[hidden] { display: none; }\n.lesson-main h1 { margin: 0 0 6px; color: #126e75; font-size: 1.6rem; }\n.lesson-main p { margin: 0; color: #586c82; font-size: .87rem; }`,
         solutionJs: `const tabs = document.querySelectorAll('[data-tab]');\nconst panels = document.querySelectorAll('[data-panel]');\n\nfunction choose(name) {\n  tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === name));\n  panels.forEach(panel => panel.hidden = panel.dataset.panel !== name);\n}\n\ntabs.forEach(tab => {\n  tab.addEventListener('click', () => choose(tab.dataset.tab));\n});\nchoose('html');`
       },
+      ...ADDITIONAL_EXERCISES.filter(e => e.category === "css-js"),
       {
         id: "spinner", category: "animation", title: "วงโหลดหมุน", level: "เริ่มต้น",
         brief: "สร้างวงแสดงสถานะโหลดด้วย CSS keyframes พร้อมปุ่มสลับหยุดและเริ่มใหม่",
@@ -562,6 +653,7 @@
         solutionCss: `.traffic-demo { text-align: center; }\n.traffic-light { display: grid; gap: 8px; width: 70px; padding: 10px; margin: 0 auto 10px; border-radius: 16px; background: #142d45; box-shadow: 0 10px 20px #132d4540; }\n.bulb { width: 50px; height: 50px; border-radius: 50%; opacity: .24; box-shadow: inset 0 2px 8px #0008; }\n.red { background: #ff5959; }\n.yellow { background: #ffd05a; }\n.green { background: #3be0a2; }\n.bulb.on { opacity: 1; box-shadow: 0 0 20px currentColor, inset 0 2px 8px #0004; }\n.traffic-demo p { font-weight: 900; color: #263f56; margin-bottom: 10px; }\n.traffic-actions { display: flex; gap: 6px; justify-content: center; }\n.traffic-actions button { border: 0; border-radius: 8px; background: #dff3f1; color: #0b6467; padding: 7px 10px; font-size: .79rem; font-weight: 800; cursor: pointer; }`,
         solutionJs: `const bulbs = [document.querySelector('.red'), document.querySelector('.green'), document.querySelector('.yellow')];\nconst names = ['ไฟแดง', 'ไฟเขียว', 'ไฟเหลือง'];\nconst label = document.querySelector('#traffic-label');\nlet step = 0, timer;\n\nfunction draw() {\n  bulbs.forEach((bulb, i) => bulb.classList.toggle('on', i === step));\n  label.textContent = names[step];\n}\n\ndocument.querySelector('#traffic-play').addEventListener('click', () => {\n  if (timer) return;\n  timer = setInterval(() => {\n    step = (step + 1) % 3;\n    draw();\n  }, 1000);\n});\ndocument.querySelector('#traffic-pause').addEventListener('click', () => {\n  clearInterval(timer);\n  timer = null;\n});\ndocument.querySelector('#traffic-reset').addEventListener('click', () => {\n  clearInterval(timer);\n  timer = null;\n  step = 0;\n  draw();\n});\ndraw();`
       },
+      ...ADDITIONAL_EXERCISES.filter(e => e.category === "animation"),
       {
         id: "hide-tiles", category: "dom", title: "คลิกแล้วหาย", level: "เริ่มต้น",
         brief: "คลิกการ์ดแล้วการ์ดนั้นหายไปพร้อมนับจำนวนที่เหลือ และกดรีเซ็ตให้กลับมาครบ",
@@ -604,6 +696,7 @@
         solutionCss: `.rings-demo { text-align: center; }\n.ring { display: grid; place-items: center; border-radius: 50%; cursor: pointer; transition: background .22s, transform .22s; }\n.ring:focus-visible { outline: 3px solid #f7a847; outline-offset: 3px; }\n.outer { width: 210px; height: 210px; margin: 0 auto 10px; background: #deebf2; display: grid; place-items: center; }\n.middle { width: 142px; height: 142px; background: #b7d5df; display: grid; place-items: center; }\n.inner { width: 74px; height: 74px; background: #67adb7; color: #073846; font-size: .72rem; font-weight: 900; }\n.outer.active { background: #f7c8bf; }\n.middle.active { background: #ffdb82; }\n.inner.active { background: #62ddbf; transform: scale(1.06); }\n.rings-demo p { margin: 10px 0; color: #355269; font-size: .82rem; }\n.rings-demo button { border: 0; border-radius: 8px; background: #173b59; color: white; padding: 7px 15px; cursor: pointer; }`,
         solutionJs: `const outer = document.querySelector('#outer');\nconst middle = document.querySelector('#middle');\nconst inner = document.querySelector('#inner');\nconst status = document.querySelector('#ring-status');\n\nfunction onActivate(el, action) {\n  el.addEventListener('click', e => {\n    e.stopPropagation();\n    action();\n  });\n}\n\nonActivate(outer, () => {\n  outer.classList.toggle('active');\n  status.textContent = 'เปลี่ยนเฉพาะวงนอก';\n});\nonActivate(middle, () => {\n  middle.classList.toggle('active');\n  status.textContent = 'เปลี่ยนเฉพาะวงกลาง';\n});\nonActivate(inner, () => {\n  [outer, middle, inner].forEach(el => el.classList.toggle('active'));\n  status.textContent = 'เปลี่ยนทั้งสามวง';\n});\ndocument.querySelector('#rings-reset').addEventListener('click', () => {\n  [outer, middle, inner].forEach(el => el.classList.remove('active'));\n  status.textContent = 'กลับสู่สถานะเริ่มต้น';\n});`
       },
+      ...ADDITIONAL_EXERCISES.filter(e => e.category === "dom"),
       {
         id: "name-sort", category: "mixed", title: "เพิ่มชื่อและเรียงลำดับ", level: "เริ่มต้น",
         brief: "พิมพ์ชื่อแล้วเพิ่มลงรายการ จากนั้นกดเรียง ก–ฮ หรือ ฮ–ก ได้ทันที",
@@ -645,14 +738,17 @@
         ],
         solutionCss: `.move-demo { text-align: center; }\n.arena { position: relative; width: min(100%, 300px); height: 172px; margin: 0 auto 10px; border: 2px dashed #99b6c8; border-radius: 10px; background: repeating-linear-gradient(0deg, #f5fbfc 0 20px, #ecf5f7 20px 21px); overflow: hidden; }\n.moving-box { position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 9px; background: #0d8987; color: white; font-size: .72rem; font-weight: 900; transition: left .16s, top .16s; }\n.move-demo p { margin: 8px 0; color: #365a70; font-size: .8rem; font-weight: 800; }\n.direction-pad { display: grid; justify-items: center; gap: 4px; }\n.direction-pad > div { display: flex; gap: 4px; }\n.direction-pad button { border: 0; border-radius: 7px; background: #173c5e; color: white; min-width: 48px; padding: 6px 8px; font-size: .78rem; cursor: pointer; }\n.direction-pad #move-reset { background: #e3f3f0; color: #0d6566; }`,
         solutionJs: `const arena = document.querySelector('.arena');\nconst box = document.querySelector('#moving-box');\nconst label = document.querySelector('#position-label');\nlet x = 0, y = 0;\nconst step = 22;\n\nfunction draw() {\n  box.style.left = x + 'px';\n  box.style.top = y + 'px';\n  label.textContent = 'ตำแหน่ง: ' + x + ', ' + y;\n}\n\ndocument.querySelectorAll('[data-move]').forEach(button => {\n  button.addEventListener('click', () => {\n    const dir = button.dataset.move;\n    const maxX = arena.clientWidth - box.offsetWidth - 4;\n    const maxY = arena.clientHeight - box.offsetHeight - 4;\n    if (dir === 'left') x = Math.max(0, x - step);\n    if (dir === 'right') x = Math.min(maxX, x + step);\n    if (dir === 'up') y = Math.max(0, y - step);\n    if (dir === 'down') y = Math.min(maxY, y + step);\n    draw();\n  });\n});\n\ndocument.querySelector('#move-reset').addEventListener('click', () => {\n  x = 0;\n  y = 0;\n  draw();\n});\ndraw();`
-      }
+      },
+      ...ADDITIONAL_EXERCISES.filter(e => e.category === "mixed"),
+      ...ADDITIONAL_EXERCISES.filter(e => e.category === "async")
     ];
 
     const GROUPS = [
       { id: "css-js", label: "01 · CSS + JS: จัดหน้าตา" },
       { id: "animation", label: "02 · Animation และ keyframes" },
       { id: "dom", label: "03 · DOM management" },
-      { id: "mixed", label: "04 · CSS + JS + DOM" }
+      { id: "mixed", label: "04 · CSS + JS + DOM" },
+      { id: "async", label: "05 · Promise และ Async/Await" }
     ];
 
     let currentExercise = EXERCISES[0];
